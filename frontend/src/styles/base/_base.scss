@@ -1,0 +1,161 @@
+/* fonts */
+
+// @import url(//db.onlinewebfonts.com/c/1094504ae47cb9cfa800bc04261c211a?family=Geomanist);
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+@font-face {
+    font-family: "Geomanist";
+    src: url("//db.onlinewebfonts.com/t/1094504ae47cb9cfa800bc04261c211a.eot");
+    src: url("//db.onlinewebfonts.com/t/1094504ae47cb9cfa800bc04261c211a.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/1094504ae47cb9cfa800bc04261c211a.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/1094504ae47cb9cfa800bc04261c211a.woff") format("woff"), url("//db.onlinewebfonts.com/t/1094504ae47cb9cfa800bc04261c211a.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/1094504ae47cb9cfa800bc04261c211a.svg#Geomanist") format("svg");
+}
+
+
+/* reset & common styles */
+
+body {
+    margin: 0;
+    padding: 0;
+    color: black;
+    // color: var(--color-grey-dark-2);
+    background-image: linear-gradient(to right bottom, var(--color-primary-1), var(--color-primary-2));
+    overflow-y: auto;
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: "Inter", sans-serif;
+    letter-spacing: 2px;
+    list-style-type: none;
+    text-decoration: none;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+.tui-image-editor-controls-logo>img {
+    display: none;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%; // 1rem = 10px, 10px/16px = 62.5%
+    min-height: 100%;
+    @media only screen and (max-width: $bp-large) {
+        font-size: 50%;
+    }
+    @include respond(small-desktop) {
+        font-size: 59%; //1rem = 12, 12/16
+    }
+    @include respond(tab-land) {
+        // width < 1200?
+        font-size: 56.25%; //1 rem = 9px, 9/16 = 50%
+    }
+    @include respond(tab-port) {
+        // width < 900?
+        font-size: 50%; //1 rem = 8px, 8/16 = 50%
+    }
+    @include respond(phone) {
+        // width < 900?
+        font-size: 36%; //1 rem = 8px, 8/16 = 50%
+    }
+    @include respond(small-phone) {
+        // width < 900?
+        font-size: 36%; //1 rem = 8px, 8/16 = 50%
+    }
+    @include respond(big-desktop) {
+        font-size: 95%; //1rem = 12, 12/16
+    }
+}
+
+.App {
+    text-align: center;
+}
+
+.App-logo {
+    height: 40vmin;
+    pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
+}
+
+.App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.App-link {
+    color: #61dafb;
+}
+
+.cards {
+    max-width: 500px;
+    margin-bottom: 10px;
+}
+
+.custom-dropdown .dropdown-menu.show {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.react-date-picker {
+    margin-right: 7px;
+}
+
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+:root {
+    --text-primary: #b6b6b6;
+    --text-secondary: #ececec;
+    --bg-navbar-primary: #cdc9c3;
+    --bg-navbar-secondary: #000000;
+    --bg-color-hp-primary: #fbf7f0;
+    --bg-color-hp-secondary: linear-gradient(to bottom, #e9d8d0, #aa9d99, #6e6565, #373334, #000000);
+    --bg-color-not-hp-secondary: #212121;
+    --bg-logo-primary: #555555;
+    --bg-logo-secondary: #141418;
+    --home-title-primary: black;
+    --home-title-secondary: white;
+    --sign-btn-primary: #aaaaaa;
+    --sign-btn-secondary: #555555;
+    --sign-btn-fontColor-primary: black;
+    --sign-btn-fontColor-secondary: white;
+    --navLink-text-primary: black;
+    --navLink-text-secondary: white;
+    --logoTitle-primary: black;
+    --logoTitle-seondary: white;
+    --border-primary: black;
+    --border-secondary: white;
+    --input-box-bg-primary: #cdc9c3;
+    --input-box-bg-secondary: #ffffff00;
+    --input-box-border-1-primary: #cdc9c3;
+    --input-box-border-1-secondary: black;
+    --input-box-border-2-primary: #cdc9c3;
+    --input-box-border-2-secondary: rgba(255, 255, 255, 0.5);
+    --stock-container-primary: #a6a6a4;
+    --stock-container-secondary: #f6f5f5;
+    --modal-btn-primary: black;
+    --modal-btn-secondary: white;
+    /////////////////////////////////////////
+     ::-webkit-scrollbar {
+        width: 0px;
+        background: transparent;
+    }
+    overflow-x: hidden;
+}

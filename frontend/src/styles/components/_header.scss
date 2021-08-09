@@ -1,0 +1,224 @@
+.navbar__cont {
+    scroll-behavior: none;
+    background-color: var(--bg-navbar);
+    transition: width 600ms ease;
+    overflow: scroll;
+    position: fixed;
+    z-index: 999;
+    // padding: 10rem;
+    // scrollbar-color: rgb(7, 7, 7) rgb(0, 0, 0) !important;
+    scrollbar-width: none !important;
+    background-color: whitesmoke;
+     ::-webkit-scrollbar {
+        width: 0px;
+        /* Remove scrollbar space */
+        background: transparent;
+        /* Optional: just make scrollbar invisible */
+    }
+    &:hover {
+        .logo>a>svg {
+            transform: rotate(180deg) translateX(-2rem) scale(0.8);
+            transition: var(--transition-speed);
+        }
+    }
+}
+
+.title {
+    font-family: 'IBM Plex Sans', sans-serif;
+    margin: 2rem 2rem 0 2rem;
+    padding-top: 2rem;
+    color: var(--logoTitle);
+    font-size: 1.5rem;
+    &:hover {
+        text-decoration: none;
+        color: var(--logoTitle);
+    }
+}
+
+.navbar-nav {
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    // min-width: 80rem;
+}
+
+.nav-item {
+    width: 100%;
+}
+
+.nav-item:last-child {
+    margin-top: auto;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    height: 8rem;
+    color: var(--text-primary);
+    text-decoration: none;
+    filter: grayscale(100%) opacity(0.7);
+    transition: var(--transition-speed);
+    cursor: pointer;
+}
+
+.nav-link:hover {
+    filter: grayscale(0%) opacity(1);
+    background: var(--bg-secondary);
+}
+
+.link-text {
+    font-family: 'IBM Plex Sans', sans-serif;
+    color: black;
+    align-self: center;
+    white-space: nowrap;
+    font-size: 1.4rem;
+    margin: 0.6rem 0rem 0 0;
+}
+
+.register {
+    color: #ff7eee;
+    display: inline;
+}
+
+.logout svg {
+    right: 2rem;
+}
+
+.nav-link svg {
+    width: 2rem;
+    min-width: 3rem;
+    margin: 0 2rem 0 3rem;
+}
+
+// .fa-primary {
+//     color: #ff7eee;
+// }
+// .fa-secondary {
+//     color: #df49a6;
+// }
+.fa-primary,
+.fa-secondary {
+    transition: var(--transition-speed);
+}
+
+.logo {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    text-transform: uppercase;
+    // margin: 0 0 1rem 50%;
+    // text-align: center;
+    color: var(--text-secondary);
+    background: var(--bg-logo);
+    font-size: 1.5rem;
+    // letter-spacing: 0.3ch;
+    width: 100%;
+}
+
+.logo svg {
+    margin: 0 0 2rem 4rem;
+    transform: scale(1.5) rotate(0deg);
+    transition: var(--transition-speed);
+}
+
+.logo-text {
+    font-size: 1.4rem;
+    // display: inline;
+    outline: none;
+    position: absolute;
+    left: -999px;
+    transition: var(--transition-speed);
+}
+
+.navbar__cont:hover .logo svg {
+    transform: rotate(-180deg);
+    transform: translateX(2rem);
+}
+
+
+/* Small screens */
+
+@media only screen and (max-width: 600px) {
+    .navbar__cont {
+        bottom: 0;
+        width: 100vw;
+        height: 5rem;
+    }
+    .logo {
+        display: none;
+    }
+    .navbar-nav {
+        flex-direction: row;
+    }
+    .nav-link {
+        justify-content: center;
+    }
+    main {
+        margin: 0;
+    }
+}
+
+
+/* Large screens */
+
+@media only screen and (min-width: 600px) {
+    .navbar__cont {
+        top: 0;
+        width: 10rem;
+        height: 100vh;
+    }
+    .navbar__cont:hover {
+        width: 19rem;
+    }
+    .navbar__cont:hover .link-text {
+        display: inline-block;
+    }
+    .navbar__cont:hover .logo svg {
+        margin: 0 0 0.5rem 14rem;
+        transform: scale(1.15);
+    }
+    .navbar__cont:hover .logo-text {
+        left: 0px;
+    }
+}
+
+.dark {
+    --text-primary: #b6b6b6;
+    --text-secondary: #ececec;
+    --bg-primary: #23232e;
+    --bg-secondary: #141418;
+}
+
+.light {
+    --text-primary: #1f1f1f;
+    --text-secondary: #000000;
+    --bg-primary: #ffffff;
+    --bg-secondary: #e4e4e4;
+}
+
+.solar {
+    --text-primary: #576e75;
+    --text-secondary: #35535c;
+    --bg-primary: #fdf6e3;
+    --bg-secondary: #f5e5b8;
+}
+
+.theme-icon {
+    display: none;
+}
+
+.dark #darkIcon {
+    display: block;
+}
+
+.light #lightIcon {
+    display: block;
+}
+
+.solar #solarIcon {
+    display: block;
+}

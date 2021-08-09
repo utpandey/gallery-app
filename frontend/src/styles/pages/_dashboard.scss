@@ -1,0 +1,81 @@
+.dashboard__cont {
+    padding: 5rem 2rem 0 12rem;
+    height: 100%;
+    width: 100%;
+    &__headerCont {
+        border-radius: 1rem;
+        background-color: white;
+        display: flex;
+        justify-content: space-between;
+        padding: 2rem;
+        &__title {
+            font-size: 2.5rem;
+            font-weight: bold
+        }
+        &__info {
+            color: grey;
+            align-self: center;
+            font-size: 2rem;
+        }
+    }
+    &__mainCont {
+        border-radius: 1rem;
+        margin: 2rem 0 2rem 0;
+        background-color: white;
+        display: flex;
+        flex-direction: row;
+        padding: 2rem;
+        &__empCont {
+            border-radius: 1rem;
+            flex-direction: row;
+            padding: 1rem;
+            display: flex;
+            flex: 1;
+            // flex-direction: ;
+            &__imgCont__img {
+                width: 15%;
+            }
+            &__infoCont {
+                display: flex;
+                flex-direction: column;
+                padding: 0 0 0 1rem;
+                justify-content: center;
+                &__header {
+                    color: grey;
+                    font-size: 3.5rem;
+                    padding: 0.5rem 0 0.5rem 0;
+                }
+                &__body {
+                    font-size: 4rem;
+                    padding: 0.5rem 0 0.5rem 0;
+                }
+            }
+        }
+        &__visitorCont {
+            border-radius: 1rem;
+            flex-direction: row;
+            padding: 1rem;
+            display: flex;
+            flex: 1;
+            // flex-direction: ;
+            &__imgCont__img {
+                width: 15%;
+            }
+            &__infoCont {
+                display: flex;
+                flex-direction: column;
+                padding: 0 0 0 1rem;
+                justify-content: center;
+                &__header {
+                    color: grey;
+                    font-size: 3.5rem;
+                    padding: 0.5rem 0 0.5rem 0;
+                }
+                &__body {
+                    font-size: 4rem;
+                    padding: 0.5rem 0 0.5rem 0;
+                }
+            }
+        }
+    }
+}
