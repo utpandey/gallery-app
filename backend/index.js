@@ -40,3 +40,5 @@ mongoose.connection.on('error', (err) => {
 app.listen(serverConfig.port, () => {
     console.log("Server running: " + serverConfig.port)
 })
+
+module.exports = app;

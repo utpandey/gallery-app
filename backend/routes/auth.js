@@ -10,10 +10,10 @@ const requireToken = require('../middlewares/requireToken');
 // signup user
 router.post('/user/signup', async(req, res) => {
 
-    const { email, password, firstName, lastName, team } = req.body;
+    const { email, password, firstName, lastName } = req.body;
 
     try {
-        const user = new User({ email, password, firstName, lastName, team });
+        const user = new User({ email, password, firstName, lastName });
         await user.save();
         const id = user._id;
         const token = jwt.sign({ userId: user._id }, serverConfig.jwtKey)
@@ -56,54 +56,8 @@ router.post('/user/signin', async(req, res) => {
 
 })
 
-// return  a user's(reportee) bug
-router.post("/user/bug", async(req, res) => {
-    const { reporteeId } = req.body;
-
-    try {
-        User.findOne({ _id: reporteeId },
-            function(error, obj) {
-                if (error) {
-                    console.log(error);
-                } else {
-                    console.log(obj)
-                    res.status(200);
-                    res.send(obj);
-                    // console.log(success);
-                }
-            }
-        );
-    } catch (err) {
-        res.status(422).send(err.message);
-        console.log(err);
-    }
-});
-
 router.get('/', requireToken, (req, res) => {
     res.send({ email: req.user.email })
 })
-
-
-// return all users
-router.get('/user/all', (req, res) => {
-    User.find({}, function(err, user) {
-        var usersMap = [];
-        user.forEach(function(users) {
-            usersMap.push({
-                id: users._id,
-                email: users.email,
-                firstName: users.firstName,
-                lastName: users.lastName,
-                team: users.team,
-                bugs: user.bugs
-            });
-            // usersMap[visitor._id] = visitor;
-        });
-        console.log(usersMap);
-        res.send(usersMap);
-    })
-})
-
-
 
 module.exports = router;
