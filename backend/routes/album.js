@@ -54,13 +54,13 @@ router.post("/album/update/:albumId", async(req, res) => {
 router.get("/album/all/:userId", (req, res) => {
     const user = req.params.userId;
     try {
-        Album.findOne({ user: user }, function(error, obj) {
+        Album.find({ user: user }, function(error, obj) {
             if (error) {
                 console.log(error);
             } else {
                 console.log(obj);
                 // var albumObj = obj.albums;
-                // res.status(200).send(albumObj);
+                res.status(200).send(obj);
             }
         });
     } catch (err) {
@@ -73,19 +73,50 @@ router.get("/album/all/:userId", (req, res) => {
 });
 
 // GET album name and containing images
-router.get("/album/:albumId/content", async(req, res, next) => {
+router.get("/album/:albumId/content", async(req, res) => {
+    try {
+        Album.findById(req.params.albumId).populate('Image')
+            .then(function(result) {
+                console.log(result);
+                console.log(result);
+                res.status(200).send(result);
+            })
+            // .exec(function(error, result) {
+            //     console.log(result);
+            //     res.status(200).send(result);
+            // })
+            // Album.findById(req.params.albumId).then((qwerty) => {
+            //         console.log(qwerty);
+            //         return Image.find({ album: req.params.albumId })
+            //     })
+            //     .then((image) =>
+            //         console.log(image),
+            //         res.status(200).send(image)
+            //     );
+    } catch (err) {
+        res.status(422).send(err.message);
+        console.log(err);
+    }
+    // try {
+    //     Album.findById((req.params.albumId), Image.find({ album: req.params.albumId }), function(error, obj) {
+    //         if (error) {
+    //             console.log(error);
+    //         } else {
+    //             console.log(obj);
+    //             // var albumObj = obj.albums;
+    //             res.status(200).send(obj);
+    //         }
+    //     });
+    // } catch (err) {
+    //     res.status(422).send(err.message);
+    //     console.log(err);
+    // }
     // return Promise.all([
-    //         Album.findById(req.params.id),
-    //         Image.find({ album: req.params.id }),
+    //         Album.findById(req.params.albumId),
+    //         Image.find({ album: req.params.albumId }),
     //     ])
-    //     .then((albumContents) => res.send(albumContents))
+    //     .then((albumContents) => res.send(albumContents[1]))
     //     .catch(next);
-    return Promise.all([
-            Album.findById(req.params.albumId),
-            Image.find({ album: req.params.albumId }),
-        ])
-        .then((albumContents) => res.send(albumContents[1]))
-        .catch(next);
 });
 
 // router.put("/album/:id", (req, res, next) => {

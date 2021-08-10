@@ -1,22 +1,22 @@
+const chai = require('chai');
 const expect = require("chai").expect;
+const chaiHttp = require('chai-http');
+chai.use(chaiHttp);
+chai.should();
+
 const request = require("supertest");
-const mongoose = require("mongoose");
 
 const app = require("../../../index");
 const server = require("../../../models");
 
-describe("POST /user/signin", () => {
-    beforeEach((done) => {
-        mongoose
-            .connect(server.connectionUri, server.connectionOptions)
-            .then(() => done())
-            .catch((err) => done(err));
+describe("User api", () => {
+    before((done) => {
+        server.connect()
+        done();
     });
     after((done) => {
-        mongoose
-            .disconnect(server.connectionUri, server.connectionOptions)
-            .then(() => done())
-            .catch((err) => done(err));
+        server.close()
+        done();
     });
 
     it('OK, signing in', (done) => {
@@ -29,21 +29,6 @@ describe("POST /user/signin", () => {
                 done();
             }).catch(done);
     })
-});
-
-describe("POST /user/signup", () => {
-    beforeEach((done) => {
-        mongoose
-            .connect(server.connectionUri, server.connectionOptions)
-            .then(() => done())
-            .catch((err) => done(err));
-    });
-    after((done) => {
-        mongoose
-            .disconnect(server.connectionUri, server.connectionOptions)
-            .then(() => done())
-            .catch((err) => done(err));
-    });
 
     it('OK, signup for a new user', (done) => {
         request(app).post('/user/signin')

@@ -41,8 +41,9 @@ router.post('/picture/add/:userId', async(req, res) => {
         .catch(next);
 })
 
-.delete('/:id', (req, res, next) => {
-    Image.findByIdAndRemove(req.params.id)
+.delete('/picture/delete/:id', (req, res, next) => {
+    const id = req.params.id;
+    Image.findByIdAndRemove(id)
         .then(deleted => res.send(deleted))
         .catch(next);
 });
