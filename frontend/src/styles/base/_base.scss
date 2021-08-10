@@ -14,8 +14,7 @@
 body {
     margin: 0;
     padding: 0;
-    color: black;
-    // color: var(--color-grey-dark-2);
+    color: var(--color-grey-dark-2);
     background-image: linear-gradient(to right bottom, var(--color-primary-1), var(--color-primary-2));
     overflow-y: auto;
     background-size: cover;

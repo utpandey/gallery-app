@@ -1,25 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
-const authSlice = createSlice({
-    name: 'auth',
+const imageSlice = createSlice({
+    name: 'image',
     initialState: {
-        user: {
-            token: null,
-            id: null
-        },
-        visitors: null,
-        employees: null,
-        isAuthenticated: false,
-        isDrawerOpen: false,
-        loading: false
+        images: null
     },
     reducers: {
-        LOGIN: (state, action) => {
-            const { token, id } = action.payload;
-            state.user = {
-                token: token,
-                id: id
-            }
-            state.isAuthenticated = true;
+        AdddImages: (state, action) => {
+            // const { token, id } = action.payload;
+            state.images = action.payload;
         },
         LOGOUT: (state) => {
             state.user = {
@@ -48,10 +36,8 @@ const authSlice = createSlice({
     }
 });
 
-const { actions, reducer } = authSlice;
+const { actions, reducer } = imageSlice;
 
-export const { LOGIN, LOGOUT, OPENDRAWER, ADDVISITORS, EMPTYVISITORS, ADDEMPLOYEES, EMPTYEMPLOYEES } = authSlice.actions;
-
-export const selectUser = ({ auth }) => auth;
+export const { AdddImages } = imageSlice.actions;
 
 export default reducer;

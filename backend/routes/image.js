@@ -5,35 +5,44 @@ const router = express.Router();
 
 // create a picture
 router.post('/picture/add/:userId', async(req, res) => {
-    // req.body.user = req.params.userId;
-    const { link, album } = req.body;
+    const link = req.body.link;
     const user = req.params.userId;
     try {
-        const pictureObj = new Image({ link, album, user });
+        const pictureObj = new Image({ link, user });
         await pictureObj.save(function(err) {
             if (err) {
                 res.status(401);
             }
-            // console.log(pictureObj);
-            // var pictureId = pictureObj._id;
-            // res.status(200).send(bugObject);
+            console.log(pictureObj);
             res.status(200).send(pictureObj);
         });
-        // new Image(req.body).save()
-        //     .then(saved => res.send(saved))
-        //     .catch(next);
     } catch (err) {
         res.status(422).send(err.message);
         console.log(err);
     }
 })
 
-//     .post('/:userId', (req, res, next) => {
-//     req.body.user = req.params.userId;
-//     new Image(req.body).save()
-//         .then(saved => res.send(saved))
-//         .catch(next);
-// })
+// return all pictures from a user
+router.get('/picture/getAll/:userId', async(req, res) => {
+    const user = req.params.userId;
+    console.log(user)
+    try {
+        await Image.find({ user: user })
+            .then(function(err, result) {
+                if (err) {
+                    console.log(err);
+                    res.status(422).send(err);
+                }
+                console.log(result);
+                res.status(200).send(result);
+            })
+
+    } catch (err) {
+        res.status(422).send(err.message);
+        console.log(err);
+    }
+})
+
 
 .put('/:id', (req, res, next) => {
     Image.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })

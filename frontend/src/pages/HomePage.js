@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from 'axios';
 import "tui-image-editor/dist/tui-image-editor.css";
 import ImageEditor from "@toast-ui/react-image-editor";
+import {imageAdd} from '../utils/imageApi';
+import { useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 const icona = require("tui-image-editor/dist/svg/icon-a.svg");
 const iconb = require("tui-image-editor/dist/svg/icon-b.svg");
@@ -23,21 +25,16 @@ const myTheme = {
 function HomePage() {
   const [imageSrc, setImageSrc] = useState("");
   const imageEditor = React.createRef();
-  // const inputImage = React.createRef();
+  const userId = useSelector((state) => state?.auth?.user?.id);
   const saveImageToDisk = async () => {
     const imageEditorInst = imageEditor.current.imageEditorInst;
     const data = imageEditorInst.toDataURL();
     const { url } = await fetch("http://localhost:8080/s3Url").then((res) =>
       res.json()
     );
-    console.log(data);
     if (data) {
-      // setImageSrc(data);
       const mimeType = data.split(";")[0];
       const extension = data.split(";")[0].split("/")[1];
-      console.log(mimeType);
-      console.log(extension);
-      console.log(download(data, `image.${extension}`, mimeType));
       download(data, `image.${extension}`, mimeType);
     }
     try {
@@ -46,14 +43,15 @@ function HomePage() {
         headers: {
           'Content-Type': 'image/*',
           "Content-Encoding": "base64",
-          // even tried this
-          // ConentEncoding: 'base64'
         },
-      });
+      })
+      if(result){
+        const link = url.split('?')[0];
+        const imageData = {link, userId}
+        imageAdd(imageData);
+      }
       console.log(result);
-      console.log(result?.config?.data)
       setImageSrc(result?.config?.data)
-      // console.log(imageSrc === result?.config?.data)
       return result;
     } catch (e) {
       console.log(e.message);

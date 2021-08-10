@@ -1,0 +1,46 @@
+.container {
+    max-width: 150rem;
+    margin: 15rem auto;
+    // background-color: var(--color-grey-light-4);
+    box-shadow: var(--shadow-dark);
+    // min-height: 240rem;
+    border-radius: 1rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    @media screen and (max-width: 1440px) {
+        max-width: 120rem;
+        margin: 8rem auto;
+    }
+    @include respond(tab-land) {
+        max-width: 100rem;
+        margin: 8rem auto;
+    }
+    @include respond(tab-port) {
+        max-width: 80rem;
+        margin: 8rem auto;
+    }
+    @include respond(phone) {
+        max-width: 70rem;
+        margin: 8rem auto;
+    }
+}
+
+.page-enter {
+    opacity: 0;
+}
+
+.page-enter-active {
+    opacity: 1;
+    transition: opacity 400ms;
+    transition-delay: 600ms;
+}
+
+.page-exit {
+    opacity: 1;
+}
+
+.page-exit-active {
+    opacity: 0;
+    transition: opacity 400ms;
+}
