@@ -6,15 +6,16 @@ const router = express.Router();
 
 // Create an Album
 router.post("/album/add/:userId", async(req, res) => {
-    const { title } = req.body;
+    const { title, images } = req.body;
     const user = req.params.userId;
+    console.log(images)
     try {
-        const albumObj = new Album({ user, title });
+        const albumObj = new Album({ user, title, images });
         await albumObj.save(function(err) {
             if (err) {
                 res.status(401);
             }
-            // console.log(albumObj);
+            console.log(albumObj);
             // var pictureId = albumObj._id;
             // res.status(200).send(bugObject);
             res.status(200).send(albumObj);
@@ -58,9 +59,9 @@ router.get("/album/all/:userId", (req, res) => {
             if (error) {
                 console.log(error);
             } else {
-                console.log(obj);
+                // console.log(obj);
                 // var albumObj = obj.albums;
-                res.status(200).send(obj);
+                res.status(200).json(obj);
             }
         });
     } catch (err) {
@@ -75,11 +76,11 @@ router.get("/album/all/:userId", (req, res) => {
 // GET album name and containing images
 router.get("/album/:albumId/content", async(req, res) => {
     try {
-        Album.findById(req.params.albumId).populate('Image')
+        Album.findById(req.params.albumId)
             .then(function(result) {
-                console.log(result);
-                console.log(result);
-                res.status(200).send(result);
+                Image.find({ _id: result.images })
+                    .then((response) => res.send(response));
+
             })
             // .exec(function(error, result) {
             //     console.log(result);

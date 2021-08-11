@@ -15,7 +15,7 @@ describe("Images api", () => {
         done();
     });
     after((done) => {
-        server.close()
+        // server.close()
         done();
     });
 

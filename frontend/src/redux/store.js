@@ -1,10 +1,18 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import storage from 'redux-persist/lib/storage';
 import logger from 'redux-logger';
 import { persistStore, persistReducer } from 'redux-persist';
 
 import { rootReducer } from './reducers/';
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const enhancer = composeEnhancers(
+    applyMiddleware(thunk, logger),
+    // other store enhancers if any
+);
+
 
 const persistConfig = {
     key: 'authType',
@@ -13,7 +21,6 @@ const persistConfig = {
 };
 
 const pReducer = persistReducer(persistConfig, rootReducer);
-const middleware = applyMiddleware(thunk, logger);
-const store = createStore(pReducer, middleware);
+const store = createStore(pReducer, enhancer);
 const persistor = persistStore(store);
 export { persistor, store };

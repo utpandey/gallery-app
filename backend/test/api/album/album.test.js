@@ -15,7 +15,7 @@ describe("Albums api", () => {
         done();
     });
     after((done) => {
-        server.close()
+        // server.close()
         done();
     });
 
@@ -36,7 +36,7 @@ describe("Albums api", () => {
             }).catch(done);
     })
 
-    const albumId = '611138b2b99e1da12832a08b'
+    const albumId = '611353b93b51a9186db00bd2'
     it('OK, updating an album', (done) => {
         request(app).post(`/album/update/${albumId}`)
             .send({ images: "6110f28967453f709f5b7f18" })

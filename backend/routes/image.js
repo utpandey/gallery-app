@@ -13,7 +13,7 @@ router.post('/picture/add/:userId', async(req, res) => {
             if (err) {
                 res.status(401);
             }
-            console.log(pictureObj);
+            // console.log(pictureObj);
             res.status(200).send(pictureObj);
         });
     } catch (err) {
@@ -25,16 +25,17 @@ router.post('/picture/add/:userId', async(req, res) => {
 // return all pictures from a user
 router.get('/picture/getAll/:userId', async(req, res) => {
     const user = req.params.userId;
-    console.log(user)
+    // console.log(user)
     try {
-        await Image.find({ user: user })
+        await Image.find({ user: user }).sort({ "createdAt": -1 })
             .then(function(err, result) {
                 if (err) {
                     console.log(err);
                     res.status(422).send(err);
                 }
-                console.log(result);
-                res.status(200).send(result);
+                // console.log(result);
+                // console.log('36')
+                res.status(200).json(result);
             })
 
     } catch (err) {

@@ -6,38 +6,16 @@ const imageSlice = createSlice({
     },
     reducers: {
         AdddImages: (state, action) => {
-            // const { token, id } = action.payload;
             state.images = action.payload;
         },
-        LOGOUT: (state) => {
-            state.user = {
-                token: null,
-                id: null
-            }
-            state.isAuthenticated = false;
-            // RootNavigation.navigate('signin')
-
-        },
-        OPENDRAWER: (state) => {
-            state.isDrawerOpen = !state.isDrawerOpen;
-        },
-        ADDVISITORS: (state, action) => {
-            state.visitors = action.payload;
-        },
-        EMPTYVISITORS: (state) => {
-            state.visitors = null;
-        },
-        ADDEMPLOYEES: (state, action) => {
-            state.employees = action.payload;
-        },
-        EMPTYEMPLOYEES: (state) => {
-            state.employees = null;
+        RemoveImages: (state) => {
+            state.images = null;
         }
     }
 });
 
 const { actions, reducer } = imageSlice;
 
-export const { AdddImages } = imageSlice.actions;
+export const { AdddImages, RemoveImages } = imageSlice.actions;
 
 export default reducer;

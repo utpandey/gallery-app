@@ -15,7 +15,7 @@ describe("User api", () => {
         done();
     });
     after((done) => {
-        server.close()
+        // server.close()
         done();
     });
 
@@ -24,8 +24,9 @@ describe("User api", () => {
             .send({ email: 'utshav@gmail.com', password: "1hhh23456" })
             .then((res) => {
                 const body = res.body;
-                expect(body).to.contain.property("_id");
+                console.log(body)
                 expect(body).to.contain.property("token");
+                expect(body).to.contain.property("id");
                 done();
             }).catch(done);
     })
@@ -35,7 +36,7 @@ describe("User api", () => {
             .send({ email: 'utshav@gmail.com', password: "1hhh23456", firstName: "John", lastName: "Doe" })
             .then((res) => {
                 const body = res.body;
-                expect(body).to.contain.property("_id");
+                expect(body).to.contain.property("id");
                 expect(body).to.contain.property("token");
                 done();
             }).catch(done);

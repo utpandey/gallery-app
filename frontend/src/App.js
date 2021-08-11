@@ -5,7 +5,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { PersistGate } from 'redux-persist/lib/integration/react';
 
 import { store, persistor } from './redux/store';
-
+import {getAllImages} from './utils/imageApi';
+import { getAlbums } from './utils/albumApi';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';
 import Picture from './pages/Picture';
@@ -15,13 +16,15 @@ import HomePage from './pages/HomePage';
 
 function App() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-// const isAuthenticated = true;
-//   React.useEffect(() => {
-//   },[])
+  const userId = useSelector((state) => state?.auth?.user?.id);
+  React.useEffect(() => {
+	getAllImages(userId);
+	getAlbums(userId);
+},[])
 	return (
 		<Router>
 		{/* <motion.div className="container" id="container"> */}
-			{/* {isAuthenticated ? <Header /> : null} */}
+			{isAuthenticated ? <Header /> : null}
 			<AnimatePresence exitBeforeEnter={true}>
 				<Switch>
 					<Route exact={true} path="/">
@@ -33,13 +36,13 @@ function App() {
 					<Route exact={true} path="/signup">
                 {isAuthenticated ?  <Redirect to="/admin" /> : <Signup />  }
               </Route>
-					<Route exact={true} path="/picture">
+					<Route exact={true} path="/pictures">
 						{isAuthenticated ? <Picture /> : <Redirect to="/signin" />}
 					</Route>
 					<Route exact={true} path="/home">
 						{isAuthenticated ? <HomePage /> : <Redirect to="/signin" />}
 					</Route>
-					<Route exact={true} path="/album">
+					<Route exact={true} path="/albums">
 						{isAuthenticated ? <Album /> : <Redirect to="/signin" />}
 					</Route>
 				</Switch>

@@ -17,15 +17,18 @@ export const imageAdd = async(imageData) => {
 };
 
 export const getAllImages = async(userId) => {
-    console.log(userId)
-    axios.get(`/picture/getAll/${userId}`)
-        .then((res) => {
-            if (res && res.data) {
-                console.log(res.data)
-                    // store.dispatch(AdddImages(res.data));
-            }
-        })
-        .catch((err) => {
-            console.log(err);
-        });
+    fetch(`http://localhost:8080/picture/getAll/${userId}`)
+        .then((res) => res.json())
+        .then((res) => store.dispatch(AdddImages(res)))
+        // store.dispatch(AdddImages(res.data));
+        // axios.get(`/picture/getAll/${userId}`)
+        //     .then((res) => {
+        //         if (res && res.data) {
+        //             console.log(res.data)
+        //                 // store.dispatch(AdddImages(res.data));
+        //         }
+        //     })
+        //     .catch((err) => {
+        //         console.log(err);
+        //     });
 }
