@@ -9,13 +9,12 @@ const requireToken = require("../middlewares/requireToken");
 // signup user
 router.post("/user/signup", async(req, res) => {
     const { email, password, firstName, lastName } = req.body;
-
+    console.log(email, password, firstName, lastName)
     try {
         const user = new User({ email, password, firstName, lastName });
         await user.save();
         const id = user._id;
         const token = jwt.sign({ userId: user._id }, serverConfig.jwtKey);
-        const { firstName, lastName } = user;
         res.send({ token, id, firstName, lastName });
     } catch (err) {
         res.status(422).send(err.message);
