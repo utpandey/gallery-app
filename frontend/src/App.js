@@ -31,10 +31,10 @@ function App() {
 						{isAuthenticated ? <HomePage /> : <Redirect to="/signin" />}
 					</Route>
 					<Route exact={true} path="/signin">
-						{isAuthenticated ?   <Redirect to="/admin"/> : <Signin /> }
+						{isAuthenticated ?   <Redirect to="/"/> : <Signin /> }
 					</Route>
 					<Route exact={true} path="/signup">
-                {isAuthenticated ?  <Redirect to="/admin" /> : <Signup />  }
+                {isAuthenticated ?  <Redirect to="/" /> : <Signup />  }
               </Route>
 					<Route exact={true} path="/pictures">
 						{isAuthenticated ? <Picture /> : <Redirect to="/signin" />}

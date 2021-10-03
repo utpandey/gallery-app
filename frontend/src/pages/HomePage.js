@@ -96,9 +96,10 @@ function HomePage() {
         <h1
           style={{
             textAlign: "center",
-            paddingTop: "20px",
+            paddingTop: "25px",
             fontSize: "30px",
-            fontWeight: "bold",
+            fontWeight: "medium",
+            color: 'black'
           }}
         >
           Image Editor

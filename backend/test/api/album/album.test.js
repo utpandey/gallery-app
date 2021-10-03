@@ -39,7 +39,7 @@ describe("Albums api", () => {
     const albumId = '611353b93b51a9186db00bd2'
     it('OK, updating an album', (done) => {
         request(app).post(`/album/update/${albumId}`)
-            .send({ images: "6110f28967453f709f5b7f18" })
+            .send({ images: "6112fe18a587097fd2e5417e" })
             .then((res) => {
                 const body = res.body;
                 expect(body).to.contain.property("images");

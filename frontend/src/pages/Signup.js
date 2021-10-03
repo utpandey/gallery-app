@@ -234,9 +234,8 @@ Already have an account? <Link to="/signin">Login</Link>
             placeholder="Confirm Password"
           />
         </div>
-        <div className="signup__cont__left__otherCont">
+        {/* <div className="signup__cont__left__otherCont">
           <h1 className="signup__cont__left__otherCont__title">Role</h1>
-          {/* <select value={this.state.value} onChange={this.handleChange}> */}
           <select
             onChange={(e) => setType(e.target.value)}
             className="signup__cont__left__otherCont__dropDown"
@@ -247,14 +246,12 @@ Already have an account? <Link to="/signin">Login</Link>
             <option value="Distributer">Distributer</option>
             <option value="Retailer">Retailer</option>
           </select>
-        </div>
-        <div className="signup__cont__left__otherCont">
+        </div> */}
+        {/* <div className="signup__cont__left__otherCont">
           <h1 className="signup__cont__left__otherCont__title">
             Upload your Profile picture here
           </h1>
-          {/* <select value={this.state.value} onChange={this.handleChange}> */}
-          {/* <input type="file" name="avatar" onChange={(e)=> handleImageChange(e)} accept=".jpeg, .png, .jpg" className="signup__cont__left__otherCont__imgBtn" /> */}
-        </div>
+           </div> */}
         <button
           onClick={handleSignupSubmit}
           className="signup__cont__left__submitBtn"
