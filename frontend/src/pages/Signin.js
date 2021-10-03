@@ -24,31 +24,31 @@ const Signin = (props) => {
     password: "",
   });
 
-  useEffect(() => {
-    tlite
-      .from(
-        ".signup__cont__left",
-        {
-          y: 15,
-          opacity: 0,
-          ease: Power3.easeIn,
-          delay: 0.2,
-        },
-        "Start"
-      )
-      .from(".signupImg--1", {
-        y: 15,
-        opacity: 0,
-        ease: Power3.easeIn,
-        delay: 0,
-      })
-      .from(".signupImg--2", {
-        y: 15,
-        opacity: 0,
-        ease: Power3.easeIn,
-        delay: 0,
-      });
-  }, []);
+  // useEffect(() => {
+  //   tlite
+  //     .from(
+  //       ".signup__cont__left",
+  //       {
+  //         y: 15,
+  //         opacity: 0,
+  //         ease: Power3.easeIn,
+  //         delay: 0.2,
+  //       },
+  //       "Start"
+  //     )
+  //     .from(".signupImg--1", {
+  //       y: 15,
+  //       opacity: 0,
+  //       ease: Power3.easeIn,
+  //       delay: 0,
+  //     })
+  //     .from(".signupImg--2", {
+  //       y: 15,
+  //       opacity: 0,
+  //       ease: Power3.easeIn,
+  //       delay: 0,
+  //     });
+  // }, []);
 
   const login = () => {
     let valid_data = true;
