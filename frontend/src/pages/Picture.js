@@ -14,20 +14,20 @@ function Picture() {
   };
 
   useEffect(() => {
-    fetch(`http://localhost:8080/picture/getAll/${userId}`)
+    fetch(`https://gallery-be.herokuapp.com/picture/getAll/${userId}`)
       .then((res) => res.json())
       .then((res) => setPictures(res));
   }, []);
   return (
     <>
-      <div id="gallery" style={{marginTop: '5px'}}>
+      <div id="gallery" style={{ marginTop: "5px" }}>
         {pictures &&
           pictures.map((data, key) => {
             const hrefLink = `#lightbox-${key}`;
             return (
               <div key={key}>
                 <img src={data.link} />
-                <a href={hrefLink}>{key+1}</a>
+                <a href={hrefLink}>{key + 1}</a>
               </div>
             );
           })}

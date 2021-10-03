@@ -10,7 +10,7 @@ const ModalForm = ({ showModal, setModal, setLoading, setError }) => {
   const [selectedPictures, setSelectedPictures] = useState([]);
   const [selectedImageClass, setSelectedImageClass] = useState(false);
   useEffect(() => {
-    fetch(`http://localhost:8080/picture/getAll/${userId}`)
+    fetch(`https://gallery-be.herokuapp.com/picture/getAll/${userId}`)
       .then((res) => res.json())
       .then((res) => setPictures(res));
   }, []);
@@ -20,13 +20,13 @@ const ModalForm = ({ showModal, setModal, setLoading, setError }) => {
     newData.push(data);
     setSelectedPictures(newData);
   };
- 
+
   const handleSubmit = () => {
     console.log("handleSubmit");
     const albumData = { userId, title, selectedPictures };
     albumNew(albumData);
   };
-  console.log(selectedPictures)
+  console.log(selectedPictures);
   return (
     <AnimatePresence>
       {showModal ? (

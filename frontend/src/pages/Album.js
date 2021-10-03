@@ -6,9 +6,9 @@ import Snackbar from "../components/Snackbar";
 import { RemoveImages } from "../redux/reducers/imageReducer";
 import { SelectedAlbum } from "../redux/reducers/albumReducer";
 import AlbumShow from "../components/AlbumShow";
-import empty from '../assets/empty.png'
+import empty from "../assets/empty.png";
 
-import { getSpecificAlbum } from '../utils/albumApi';
+import { getSpecificAlbum } from "../utils/albumApi";
 
 function Album() {
   const [albums, setalbums] = useState(null);
@@ -22,7 +22,9 @@ function Album() {
   const images = useSelector((state) => state?.image?.images);
   const userId = useSelector((state) => state?.auth?.user?.id);
   const albumsArray = useSelector((state) => state?.album?.album);
-  const selectedAlbumRedux = useSelector((state) => state?.album?.selectedAlbum);
+  const selectedAlbumRedux = useSelector(
+    (state) => state?.album?.selectedAlbum
+  );
   const dispatch = useDispatch();
 
   const removeImages = () => {
@@ -47,10 +49,10 @@ function Album() {
     console.log(albumId);
     setAlbumDisplay((prevValue) => !prevValue);
     getSpecificAlbum(albumId);
-  }
+  };
 
   useEffect(() => {
-    fetch(`http://localhost:8080/picture/getAll/${userId}`)
+    fetch(`https://gallery-be.herokuapp.com/picture/getAll/${userId}`)
       .then((res) => res.json())
       .then((res) => setPictures(res));
   }, []);
@@ -95,19 +97,33 @@ function Album() {
             ) : (
               <>Please add images first!</>
             )}
-            {albumsArray ? albumsArray.map((data,key) => {
-             console.log(data)
-             return   <li className="zoom-on-hover" key={key}  onClick={() => specificAlbum(data._id)}>
-              <a >
-                <div className="image">
-                  {data.images.length < 1 ? <img src={empty} /> : <img src={`https://picsum.photos/id/${key}/200/300`}/>}
-                  <div className="caption">
-                    <h2>{data.title}</h2>
-                  </div>
-                </div>
-              </a>
-            </li>
-            }) : null}
+            {albumsArray
+              ? albumsArray.map((data, key) => {
+                  console.log(data);
+                  return (
+                    <li
+                      className="zoom-on-hover"
+                      key={key}
+                      onClick={() => specificAlbum(data._id)}
+                    >
+                      <a>
+                        <div className="image">
+                          {data.images.length < 1 ? (
+                            <img src={empty} />
+                          ) : (
+                            <img
+                              src={`https://picsum.photos/id/${key}/200/300`}
+                            />
+                          )}
+                          <div className="caption">
+                            <h2>{data.title}</h2>
+                          </div>
+                        </div>
+                      </a>
+                    </li>
+                  );
+                })
+              : null}
           </ul>
         </section>
       </div>

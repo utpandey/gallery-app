@@ -17,7 +17,7 @@ export const imageAdd = async(imageData) => {
 };
 
 export const getAllImages = async(userId) => {
-    fetch(`http://localhost:8080/picture/getAll/${userId}`)
+    fetch(`https://gallery-be.herokuapp.com/picture/getAll/${userId}`)
         .then((res) => res.json())
         .then((res) => store.dispatch(AdddImages(res)))
         // store.dispatch(AdddImages(res.data));
