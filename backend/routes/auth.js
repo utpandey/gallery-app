@@ -15,7 +15,8 @@ router.post("/user/signup", async(req, res) => {
         await user.save();
         const id = user._id;
         const token = jwt.sign({ userId: user._id }, serverConfig.jwtKey);
-        res.send({ token, id });
+        const { firstName, lastName } = user;
+        res.send({ token, id, firstName, lastName });
     } catch (err) {
         res.status(422).send(err.message);
         console.log(err);
@@ -38,7 +39,8 @@ router.post("/user/signin", async(req, res) => {
         await user.comparePassword(password);
         const token = jwt.sign({ userId: user._id }, serverConfig.jwtKey);
         const id = user._id;
-        res.send({ token, id });
+        const { firstName, lastName } = user;
+        res.send({ token, id, firstName, lastName });
     } catch (err) {
         console.log(err);
         return res.status(422).send({ error: "Must provide email or password" });
