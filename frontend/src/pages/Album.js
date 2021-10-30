@@ -86,7 +86,7 @@ function Album() {
                 >
                   <a>
                     <div className="image">
-                      <img src={images[0].link} />
+                      <img src={images[0]?.link} />
                       <div className="caption">
                         <h2>All</h2>
                       </div>

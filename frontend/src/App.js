@@ -28,7 +28,7 @@ function App() {
 			<AnimatePresence exitBeforeEnter={true}>
 				<Switch>
 					<Route exact={true} path="/">
-						{isAuthenticated ? <HomePage /> : <Redirect to="/signin" />}
+						{isAuthenticated ? <HomePage /> : <Redirect to="/signup" />}
 					</Route>
 					<Route exact={true} path="/signin">
 						{isAuthenticated ?   <Redirect to="/"/> : <Signin /> }
@@ -37,13 +37,13 @@ function App() {
                 {isAuthenticated ?  <Redirect to="/" /> : <Signup />  }
               </Route>
 					<Route exact={true} path="/pictures">
-						{isAuthenticated ? <Picture /> : <Redirect to="/signin" />}
+						{isAuthenticated ? <Picture /> : <Redirect to="/signup" />}
 					</Route>
 					<Route exact={true} path="/home">
-						{isAuthenticated ? <HomePage /> : <Redirect to="/signin" />}
+						{isAuthenticated ? <HomePage /> : <Redirect to="/signup" />}
 					</Route>
 					<Route exact={true} path="/albums">
-						{isAuthenticated ? <Album /> : <Redirect to="/signin" />}
+						{isAuthenticated ? <Album /> : <Redirect to="/signup" />}
 					</Route>
 				</Switch>
 			</AnimatePresence>
