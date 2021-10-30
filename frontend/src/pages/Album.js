@@ -95,7 +95,7 @@ function Album() {
                 </li>
               </>
             ) : (
-              <>Please add images first!</>
+              <h1 style={{color: 'white'}}>Please add images first!</h1>
             )}
             {albumsArray
               ? albumsArray.map((data, key) => {

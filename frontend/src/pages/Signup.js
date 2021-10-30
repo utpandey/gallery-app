@@ -3,18 +3,19 @@ import { Link } from "react-router-dom";
 import { gsap, TimelineLite, Power3 } from "gsap";
 import { useDispatch } from "react-redux";
 
-// import { LOGIN } from '../store/auth';
+import { EMAILERROR, PASSERROR } from "../redux/reducers/errorReducer";
 import signup1 from "../assets/signin1.png";
 import signup2 from "../assets/signin2.png";
 import Snackbar from "../components/Snackbar";
 import axios from "../utils/axios";
+import { signUp } from "../utils/authApi";
 
-const Signup = () => {
+const Signup = (props) => {
   const tlite = new TimelineLite({ delay: 0.3 });
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
-  const [fName, setFName] = useState("");
-  const [lName, setLName] = useState("");
+  const [firstName, setfirstName] = useState("");
+  const [lastName, setlastName] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
   const [type, setType] = useState("Farmer");
@@ -25,43 +26,21 @@ const Signup = () => {
     errorMessage: "",
   });
 
-  // useEffect(() => {
-  //   tlite
-  //     .from(
-  //       ".signup__cont__left",
-  //       {
-  //         y: 15,
-  //         opacity: 0,
-  //         ease: Power3.easeIn,
-  //         delay: 0.2,
-  //       },
-  //       "Start"
-  //     )
-  //     .from(".signupImg--1", {
-  //       y: 15,
-  //       opacity: 0,
-  //       ease: Power3.easeIn,
-  //       delay: 0,
-  //     })
-  //     .from(".signupImg--2", {
-  //       y: 15,
-  //       opacity: 0,
-  //       ease: Power3.easeIn,
-  //       delay: 0,
-  //     });
-  // }, []);
-
   const handleSignupSubmit = () => {
-    const postData = {
-      email,
-      password,
-      type,
-      profile: {
-        name: fName + lName,
-        picture: pictureBase64,
-      },
-    };
-    if (password !== repeatPassword) {
+    let valid_data = true;
+    dispatch(EMAILERROR({ isErrors: false, errorMessage: "" }));
+    dispatch(PASSERROR({ isErrors: false, errorMessage: "" }));
+    if (email === "") {
+      dispatch(EMAILERROR({ isErrors: true, errorMessage: "Required!" }));
+      valid_data = false;
+    }
+    if (password === "") {
+      dispatch(PASSERROR({ isErrors: true, errorMessage: "Required!" }));
+
+      //  setErrors({...{username_error},...{email_error},password_error: 'Required!' });
+      valid_data = false;
+    }
+        if (password !== repeatPassword) {
       setError({
         isError: true,
         errorMessage: "Passwords do not match.",
@@ -73,13 +52,56 @@ const Signup = () => {
         errorMessage: "Please enter a valid email.",
       });
     }
-    if ((fName + lName).length < 3) {
+    if ((firstName + lastName).length < 3) {
       setError({
         isError: true,
         errorMessage: "Please enter a valid name.",
       });
     }
-    setLoading(true);
+    // setUpdate(true);
+
+    // if (valid_data) {
+    // 	setProgress(true);
+    // }
+
+    if (valid_data) {
+      const signUpdata = {
+        email,
+        password,
+        firstName,
+        lastName
+      };
+      signUp(signUpdata, props);
+      // setProgress(false);
+    }
+    // const postData = {
+    //   email,
+    //   password,
+    //   type,
+    //   profile: {
+    //     name: firstName + lastName,
+    //     picture: pictureBase64,
+    //   },
+    // };
+    // if (password !== repeatPassword) {
+    //   setError({
+    //     isError: true,
+    //     errorMessage: "Passwords do not match.",
+    //   });
+    // }
+    // if (email.length < 3) {
+    //   setError({
+    //     isError: true,
+    //     errorMessage: "Please enter a valid email.",
+    //   });
+    // }
+    // if ((firstName + lastName).length < 3) {
+    //   setError({
+    //     isError: true,
+    //     errorMessage: "Please enter a valid name.",
+    //   });
+    // }
+    // setLoading(true);
     // axios.post('/authentication/register', postData)
     // 	.then(res => {
     // 		console.log(res);
@@ -193,7 +215,7 @@ Already have an account? <Link to="/signin">Login</Link>
         <div className="signup__cont__left__inputCont">
           <input
             type="text"
-            onChange={(e) => setFName(e.target.value)}
+            onChange={(e) => setfirstName(e.target.value)}
             name="firstName"
             id="firstName"
             className="signup__cont__left__inputCont__input"
@@ -204,7 +226,7 @@ Already have an account? <Link to="/signin">Login</Link>
         <div className="signup__cont__left__inputCont">
           <input
             type="text"
-            onChange={(e) => setLName(e.target.value)}
+            onChange={(e) => setlastName(e.target.value)}
             name="lastName"
             id="lastName"
             className="signup__cont__left__inputCont__input"

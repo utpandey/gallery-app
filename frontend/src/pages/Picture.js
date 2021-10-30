@@ -17,12 +17,13 @@ function Picture() {
     fetch(`https://gallery-be.herokuapp.com/picture/getAll/${userId}`)
       .then((res) => res.json())
       .then((res) => setPictures(res));
+      console.log(pictures)
   }, []);
   return (
     <>
       <div id="gallery" style={{ marginTop: "5px" }}>
-        {pictures &&
-          pictures.map((data, key) => {
+        {pictures?.length > 0 ?
+          (pictures.map((data, key) => {
             const hrefLink = `#lightbox-${key}`;
             return (
               <div key={key}>
@@ -30,10 +31,12 @@ function Picture() {
                 <a href={hrefLink}>{key + 1}</a>
               </div>
             );
-          })}
+          })) : <div className="empty__cont">
+            <h1 className="empty__cont__msg">Please add some images first!</h1>
+          </div>}
       </div>
-      {pictures &&
-        pictures.map((data, key) => {
+      {pictures?.length > 0 ?
+        (pictures.map((data, key) => {
           const id = `lightbox-${key}`;
           return (
             <div className="lightbox" id={id}>
@@ -46,7 +49,7 @@ function Picture() {
               </div>
             </div>
           );
-        })}
+        })) : null}
     </>
   );
 }

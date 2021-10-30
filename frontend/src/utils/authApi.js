@@ -16,3 +16,17 @@ export const signIn = async(loginData) => {
             store.dispatch(PASSERROR({ isErrors: true, errorMessage: err.name }));
         });
 };
+
+export const signUp = async(signUpdata) => {
+    axios.post('/user/signup', signUpdata)
+        .then((res) => {
+            if (res && res.data) {
+                store.dispatch(LOGIN(res.data));
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+            store.dispatch(EMAILERROR({ isErrors: true, errorMessage: err.name }));
+            store.dispatch(PASSERROR({ isErrors: true, errorMessage: err.name }));
+        });
+};

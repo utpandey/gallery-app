@@ -207,6 +207,15 @@ html {
   opacity: 0;
   transition: opacity 400ms; }
 
+.empty__cont {
+  width: 100vw;
+  height: 100vh;
+  overflow-y: hidden; }
+  .empty__cont__msg {
+    color: white;
+    font-size: 3rem;
+    margin-bottom: 10rem; }
+
 .snackbar__cont {
   position: fixed;
   top: 20vh;
